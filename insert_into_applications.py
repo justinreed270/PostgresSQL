@@ -4,10 +4,10 @@ from psycopg2 import sql
 def main():
     try:
         # Database Connection Parameters
-        database = 'job_applications'
-        user = 'brittany' #note Postgres requires a database named after the user before the user can access the database.
+        database = ''
+        user = '' #note Postgres requires a database named after the user before the user can access the database.
         password = ''
-        db_table = 'applications'
+        db_table = ''
 
         # Csonnect to the Postgres database
         conn = psycopg2.connect(database=database, user=user, password=password)
