@@ -5,7 +5,7 @@ def main():
     try:
         # Database Connection Parameters
         database = 'job_applications'
-        user = 'brittany'
+        user = 'brittany' #note Postgres requires a database named after the user before the user can access the database.
         password = ''
         db_table = 'applications'
 
@@ -23,19 +23,25 @@ def main():
         applicationdate = input("Enter the application date (YYYY-MM-DD)")
         status = input("Enter the application status (Pending, Accepted, Interviewing, Rejected): ")
         status = status.upper()
+        interviewdate = input("Enter Interview date: (YYYY-MM-DD)")
+        interviewfeedback = input("What feebback have you recieved? (250 max)")
+        salaryoffered = input("what is the salary on salary offered?")
 
         # Checking to see if all fields have something in them.
-        if not any ([ contactid, jobtitle, companyid, applicationdate, status]):
+        if not any ([ contactid, jobtitle, companyid, applicationdate, status,\
+            interviewdate, interviewfeedback, salaryoffered]):
             print(f"Nothing was added to {db_table}.")
             return
 
         # Inserting into application table
         insert_query = sql.SQL(
-            "Insert INTO {} (Contactid, jobtitle, companyid, applicationdate, status) VALUES (%s, %s, %s, %s, %s);".format('applications')
+            "Insert INTO {} (Contactid, jobtitle, companyid, applicationdate, status, interviewdate, \
+            interviewfeedback, salaryoffered) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);".format('applications')
         )
 
         # Adding data to  insert
-        data = (contactid or None, jobtitle or None, companyid or None, applicationdate or None, status or None)
+        data = (contactid or None, jobtitle or None, companyid or None, applicationdate \
+            or None, status or None, interviewdate or None, interviewfeedback or None, salaryoffered or None)
 
         # Execute query
         cur.execute(insert_query, data)
